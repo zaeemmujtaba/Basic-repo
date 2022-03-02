@@ -1,0 +1,8 @@
+Please consider following assumptions/clarifications:
+
+1) Currently the program doesn't store any data.
+2) Age is a whole number.
+3) Sum insured is a whole number.
+4) Premium period defines the number of months for various options.
+5) Program is made using .Net and Java script/Jquery.
+6) Visual Studio 2012 is used for development.
