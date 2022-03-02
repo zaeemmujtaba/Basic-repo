@@ -13,7 +13,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Age</label>
-                @Html.TextBox("Age", null, new { @class = "form-control", type = "number", step = "0.1", required = "required", placeholder = "Age" })
+                @Html.TextBox("Age", null, new { @class = "form-control", type = "number", step = "1", min = "0", required = "required", placeholder = "Age" })
             </div>
 
         </div>
@@ -51,9 +51,11 @@
 
         </div>
 
+    </div>
+
+    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label>Calculate</label>
                 <button class="btn btn-primary">Calculate</button>
             </div>
 
@@ -67,3 +69,39 @@
 
     </div>
 </form>
+
+<script type="text/javascript">
+
+
+    $(document).on("change", "#Occupation", function () {
+        CalculatePremium();
+    })
+
+    function CalculatePremium() {
+        var CoverageAmount = $("#SumInsured").val();
+        var Age = $("#Age").val();
+        var Factor = $("#Occupation").find(':selected').data('factor');
+
+        if (isNaN(CoverageAmount)) {
+            CoverageAmount = 0;
+
+        }
+        if (isNaN(Age)) {
+            Age = 0;
+
+        }
+
+        if (isNaN(Factor)) {
+            Factor = 0;
+
+        }
+
+        var Premium = ((CoverageAmount * Factor * Age) / (1000 * 12));
+
+        $("#PremiumAount").html(Premium);
+
+        return false;
+
+    }
+
+</script>
