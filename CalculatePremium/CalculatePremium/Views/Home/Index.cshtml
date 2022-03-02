@@ -46,13 +46,24 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Sum Insured</label>
-                @Html.TextBox("SumInsured", null, new { @class = "form-control", type = "number", required = "required", placeholder = "Sum insured" })
+                @Html.TextBox("SumInsured", null, new { @class = "form-control", type = "number", min = "0", required = "required", placeholder = "Sum insured" })
             </div>
 
         </div>
 
     </div>
 
+    <div class="row">
+        <label>Premium Period</label>
+        <select class="form-control" id="PremiumPeriod" required>
+            <option value="">Select  Period</option>
+            <option value="12">Monthly</option>
+            <option value="4">Quaterly</option>
+            <option value="1">Yearly</option>
+        </select>
+    </div>
+
+    <br />
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -61,13 +72,16 @@
 
         </div>
 
-        <div class="col-md-4">
-            <h3>Premmium Amount: </h3>
-            <h3 id="PremiumAount"></h3>
+    </div>
 
-        </div>
+    <br />
+
+    <div class="col-md-4">
+        <label>Premmium Amount: </label>
+        <h3 id="PremiumAount"></h3>
 
     </div>
+
 </form>
 
 <script type="text/javascript">
@@ -81,6 +95,7 @@
         var CoverageAmount = $("#SumInsured").val();
         var Age = $("#Age").val();
         var Factor = $("#Occupation").find(':selected').data('factor');
+        var Period = $("#PremiumPeriod").find(':selected').val();
 
         if (isNaN(CoverageAmount)) {
             CoverageAmount = 0;
@@ -96,7 +111,12 @@
 
         }
 
-        var Premium = ((CoverageAmount * Factor * Age) / (1000 * 12));
+        if (isNaN(Period)) {
+            Period = 0;
+
+        }
+
+        var Premium = ((CoverageAmount * Factor * Age) / (1000 * Period));
 
         $("#PremiumAount").html(Premium);
 
